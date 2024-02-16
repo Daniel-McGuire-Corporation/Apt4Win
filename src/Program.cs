@@ -6,7 +6,9 @@ namespace AptForWindows
     class Program
     {
         static void Main(string[] args)
+
         {
+
             // Check if any of the arguments contains "-?", "-h", or "--help"
             if (args.Length > 0 && (args[0] == "-?" || args[0] == "-h" || args[0] == "--help" || args[0] == "/help"))
             {
@@ -120,12 +122,92 @@ namespace AptForWindows
 
         static void Setup()
         {
-            
+            // Custom install logic
+            Console.WriteLine("Setting up Windows Package Manager");
+            {
+                try
+                {
+                    // strings:
+                    string downloadUrl = "https://example.com/YourApp.msix";
+                    string destinationPath = @"~\downloads";
+
+                    // Download the MSIX package using Invoke-WebRequest
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        FileName = "powershell.exe",
+                        Arguments = $"Invoke-WebRequest -Uri \"{downloadUrl}\" -OutFile \"{destinationPath}\"",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = startInfo;
+                        process.Start();
+
+                        // Read the output (if needed)
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
+
+                        // Print the output and error directly
+                        Console.WriteLine(output);
+                        Console.WriteLine(error);
+
+                        process.WaitForExit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error downloading MSIX package: " + ex.Message);
+                }
+            }
         }
 
         static void Fix()
         {
-            
+            // Custom install logic
+            Console.WriteLine("Attempting to fix by Installing Windows Package Manager");
+            {
+                try
+                {
+                    // strings:
+                    string downloadUrl = "https://example.com/YourApp.msix";
+                    string destinationPath = @"~\downloads";
+
+                    // Download the MSIX package using Invoke-WebRequest
+                    ProcessStartInfo startInfo = new ProcessStartInfo
+                    {
+                        FileName = "powershell.exe",
+                        Arguments = $"Invoke-WebRequest -Uri \"{downloadUrl}\" -OutFile \"{destinationPath}\"",
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+
+                    using (Process process = new Process())
+                    {
+                        process.StartInfo = startInfo;
+                        process.Start();
+
+                        // Read the output (if needed)
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
+
+                        // Print the output and error directly
+                        Console.WriteLine(output);
+                        Console.WriteLine(error);
+
+                        process.WaitForExit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error downloading MSIX package: " + ex.Message);
+                }
+            }
         }
 
         static void Install()
